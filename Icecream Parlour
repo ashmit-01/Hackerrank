@@ -1,0 +1,24 @@
+int* icecreamParlor(int m, int arr_count, int* arr, int* result_count) {
+    int max_price = 10000;  
+    int* map = (int*)calloc(max_price + 1, sizeof(int)); 
+    int* result = (int*)malloc(2 * sizeof(int));
+    
+    for (int i = 0; i < arr_count; i++) {
+        int price = arr[i];
+        int needed = m - price;
+        
+        if (needed >= 0 && map[needed] != 0) {
+            result[0] = map[needed];   
+            result[1] = i + 1;         
+            *result_count = 2;
+            free(map);
+            return result;
+        }
+        
+        map[price] = i + 1;
+    }
+    
+    *result_count = 0; 
+    free(map);
+    return result;
+}
