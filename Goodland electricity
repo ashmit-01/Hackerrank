@@ -1,0 +1,23 @@
+int pylons(int k, int arr_count, int* arr) {
+    int count = 0;
+    int i = 0;
+
+    while (i < arr_count) {
+        int pos = -1;
+        int right = (i + k - 1 < arr_count) ? i + k - 1 : arr_count - 1;
+
+        for (int j = right; j >= i - k + 1 && j >= 0; j--) {
+            if (arr[j] == 1) {
+                pos = j;
+                break;
+            }
+        }
+
+        if (pos == -1) return -1;
+
+        count++;
+        i = pos + k;
+    }
+
+    return count;
+}
